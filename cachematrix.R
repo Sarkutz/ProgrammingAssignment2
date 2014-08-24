@@ -30,8 +30,35 @@ makeCacheMatrix <- function (x = matrix()) {
 }
 
 
-## Write a short comment describing this function
+## Name: cacheSolve
+## Parameters: object returned by makeCacheMatrix; additional arguments to
+##   solve (see ?solve).
+## Returns: Inverse of the matrix.
+## Description: Computes the inverse of a matrix.
 
 cacheSolve <- function (x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+    inverse <- x$getinverse()
+
+    ## If inverse is in cache, fetch from cache.
+    if (!is.null(inverse)) {
+        message("getting cached data")
+        return (inverse)
+    }
+
+    ## If inverse is not in cache, compute inverse and store it in cache.
+
+    mat <- x$get()
+
+    # Create an identity matrix of appropriate size.
+    I <- matrix (data = rep(0, nrow(mat) * ncol(mat)), nrow = nrow(mat),
+                 ncol = ncol(mat))
+    for (i in nrow(mat)) {
+        I[i][i] = 1
+    }
+
+    inverse <- solve(mat, I, ...)
+
+    x$setinverse(inverse)
+    inverse
 }
+
