@@ -1,5 +1,7 @@
-## Put comments here that give an overall description of what your
-## functions do
+## makeCacheMatrix and cacheSolve provide a mechanism to store (cache)
+## a value that is computed from a matrix, so that the value needs to be
+## recomputed only if the matrix is altered (using set).
+
 
 ## Name: makeCacheMatrix
 ## Parameters: The matrix whose inverse is to be cached.
